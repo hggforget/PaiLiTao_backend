@@ -21,4 +21,5 @@ from PaiLiTao_backend import services
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',services.index),
+    path('picupload/',services.picrecive),
 ]
