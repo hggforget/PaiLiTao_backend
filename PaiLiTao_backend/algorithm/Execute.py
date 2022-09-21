@@ -34,7 +34,7 @@ def process(label,a,b):
 #遍历，条件（格式），算法比较，条件（相似度），输出
 
 #图片-dHash算法（单层文件夹）
-import _dhash
+
 def startSearch01(var1,var2,var3,tree,x,root1):
     count1=0;path= var2.get();im1=Image.open(var1.get())
     global len

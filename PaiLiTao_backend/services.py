@@ -1,11 +1,11 @@
 import json
+from tkinter import StringVar
 
 from django.http import *
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from PaiLiTao_backend.algorithm.FP import selectPath1
-
+from PaiLiTao_backend.utils.FP import *
 
 def index(request):
     context          = {}
@@ -25,5 +25,10 @@ def picrecive(request):
         with open(path,'wb') as f:
             for content in picture_obj.chunks():
                 f.write(content)
-        var1 = path
-    return HttpResponse('OK')
+        var2=r'C:/Users/HDC/Desktop'
+        var1=r'D:/PaiLiTao_backend/'+path
+        var3=int(request.POST.get('rate'))
+        img_list=start(var1,var2,var3)
+        context={}
+        context['imgs']=img_list
+    return JsonResponse(context)

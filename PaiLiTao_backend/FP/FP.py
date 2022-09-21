@@ -82,7 +82,7 @@ def sieve():#筛选函数
 
 def Init_dog():#图像显示初始化
     global label1,label2,image4,image5,label01
-    image4 = Image.open('pic.png')  #打开
+    image4 = Image.open('../algorithm/pic.png')  #打开
     w, h = image4.size              #获取原比例    
 
     pil_image_resized = resize(w, h, w_box, h_box, image4)#改成合适比例函数
@@ -90,7 +90,7 @@ def Init_dog():#图像显示初始化
     label1.configure(image = image4)
     #label2.configure(image = image4)
     
-    image5 = Image.open('pic.png')  #打开(因为image4全局后，这里引用上面就用不了了)
+    image5 = Image.open('../algorithm/pic.png')  #打开(因为image4全局后，这里引用上面就用不了了)
     pil_image_resized = resize(w, h, w_box1, h_box1, image5)    #改成合适比例函数
     image5 = ImageTk.PhotoImage(pil_image_resized)              #转成XX对象   
     label01.configure(image = image5)
@@ -343,16 +343,21 @@ def start():
         else :
             tkinter.messagebox.askokcancel('啊欧','算法未找到，也许正在制作中')
             return
-        time_end=time.time();#time.time()为1970.1.1到当前时间的毫秒数   
-        label3.config(text="耗时"+str(round(time_end-time_start,3))+'秒')#显示耗时 
+        time_end=time.time();#time.time()为1970.1.1到当前时间的毫秒数
         #自动筛选
         if (var4_1.get()==1):
             sieve()
 
-
-
-
-
+'''
+x=StringVar()
+var1=StringVar()
+var2=StringVar()
+var3=StringVar()
+numberChosen = ttk.Combobox()
+tree=ttk.Treeview()#表格 
+root = Tk()
+var4_1=IntVar()
+'''
 #label=Label(root,textvariable = result, font=("黑体", 30, "bold"))
 #label.grid(row=0,column=1,padx=20, pady=10,sticky=N)
 #窗口开始===========================================================================
@@ -360,8 +365,9 @@ root = Tk()     # 初始旷的声明
 root.title('拍立淘')#设置窗口标题
 root.geometry('1150x585+250+100')#设置窗口的大小宽x高+偏移量
 root.resizable(width=True, height=True) #宽不可变, 高可变,默认为True
-root.iconbitmap('bitbug_favicon.ico')
+root.iconbitmap('PaiLiTao_backend/algorithm/bitbug_favicon.ico')
 
+root.mainloop()#进入消息循环
 ft1 = tkFont.Font(family='Fixdsys', size=12)
 ft2 = tkFont.Font(family='Fixdsys', size=10)
 
@@ -387,12 +393,12 @@ label4=Label(frm_BBB1,textvariable = x, font=ft1)
 label4.pack(fill=BOTH)
 x.set("无任务")
 
-button_img_gif = PhotoImage(file='start.png')  
+button_img_gif = PhotoImage(file='../algorithm/start.png')
 button_img = Button(frm_BBB1,
                    image = button_img_gif,
                    text = '开始搜索'
-                    ,width=100,height=100,command=start)  
-button_img.pack(side=BOTTOM) 
+                    ,width=100,height=100,command=start)
+button_img.pack(side=BOTTOM)
 
 #框架（左）
 frm_BB1 = Frame(frm_BB,bg='blue')
@@ -404,14 +410,14 @@ frm_L.pack(side=LEFT)
 
 Label(frm_L, text='搜索结果', font=(15)).pack()
 columns=("a","b","c","d","e","f","g","h")
-tree=ttk.Treeview(frm_L,height=18,show="headings",columns=columns )#表格 
+tree=ttk.Treeview(frm_L,height=18,show="headings",columns=columns )#表格
 for col in columns:
     if (col=='a')or(col=='e'):#数字排序
         tree.heading(col, text=col, command=lambda _col=col: treeview_sort_column2(tree, _col, False))#重建标题，添加控件排序方法
     else :#默认排序
         tree.heading(col, text=col, command=lambda _col=col: treeview_sort_column1(tree, _col, False))
-tree.column('a', width=50, anchor='center') 
-tree.column('b', width=340, anchor='center') 
+tree.column('a', width=50, anchor='center')
+tree.column('b', width=340, anchor='center')
 tree.column('c', width=80, anchor='center')
 tree.column('d', width=60, anchor='center')
 tree.column('e', width=75, anchor='center')
@@ -441,7 +447,7 @@ frm_R = Frame(frm,bg='gray')
 frm_R.pack(fill=BOTH)
 Label(frm_R, text='图片预览', font=(15)).pack()
 
-pil_image = Image.open('pic.png')  #打开
+pil_image = Image.open('../algorithm/pic.png')  #打开
 w, h = pil_image.size              #获取原比例
 pil_image_resized = resize(w, h, w_box, h_box, pil_image)#改成合适比例函数
 tk_image = ImageTk.PhotoImage(pil_image_resized)         #转成XX对象
@@ -452,7 +458,7 @@ label1.pack()
 
 Label(frm_R, text='所选图片预览', font=("Helvetica", "10")).pack()
 label2 = Label(frm_R,image=tk_image, width=w_box, height=h_box)
-label2.pack() 
+label2.pack()
 
 
 
@@ -461,12 +467,12 @@ tabControl = ttk.Notebook(frm_BB1) # Create Tab Control
 tab1 = Frame(tabControl) # Create a tab
 tabControl.pack(expand=2, fill="both") # Pack to make visible
 tabControl.add(tab1, text='基础识图') # Add the tab
-tab2 = Frame(tabControl) 
-tabControl.add(tab2, text='更多功能') 
-tab3 = Frame(tabControl) 
+tab2 = Frame(tabControl)
+tabControl.add(tab2, text='更多功能')
+tab3 = Frame(tabControl)
 tabControl.add(tab3, text='图片推荐')
-tab4 = Frame(tabControl) 
-tabControl.add(tab4, text='帮助及关于') 
+tab4 = Frame(tabControl)
+tabControl.add(tab4, text='帮助及关于')
 
 #tab1 基本
 frm_B0 = Frame(tab1,bg='green')
@@ -574,7 +580,7 @@ c02.grid(row=0,column=1,sticky=N)
 
 B0=Button(frm_B2, text = "随机标签\n随便看看",bg='gold',width=8,height=3,command =lambda : recommend2(path2 = var2.get() ))
 B0.grid(row=0,column=0,sticky=W)
-B0.configure(state='disabled') 
+B0.configure(state='disabled')
 
 Label(frm_B2, text = "可能的标签：" ).grid(row=1,column=0,sticky=W)
 x1=StringVar()
@@ -582,7 +588,7 @@ label5=Label(frm_B2, text = "暂无" ,textvariable = x1)
 label5.grid(row=1,column=1,sticky=W)
 x1.set("暂无")
 
-pil_image = Image.open('pic.png')  #打开
+pil_image = Image.open('../algorithm/pic.png')  #打开
 w, h = pil_image.size              #获取原比例
 pil_image_resized = resize(w, h, w_box1, h_box1, pil_image) #改成合适比例函数
 tk_image1 = ImageTk.PhotoImage(pil_image_resized)           #转成XX对象
@@ -616,5 +622,3 @@ t.config(state="disabled")#禁止修改
 
 print(var1.get())
 print(var2.get())
-
-root.mainloop()#进入消息循环
