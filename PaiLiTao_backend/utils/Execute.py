@@ -67,7 +67,7 @@ def startSearch01(var1, var2, var3):
                 tmp_dict=dict()
                 tmp_dict['imgdata']=image_to_base64(im2)
                 tmp_dict['imgname']=filename
-                tmp_dict['similar_rate']=j
+                tmp_dict['similar_rate']="{:.0f}".format(j)
                 imgs.append(tmp_dict)
     return imgs
 
